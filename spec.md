@@ -1,7 +1,7 @@
 # Credential Helpers Specification
 
-The Credential Helper standard defines an extensible protocol for fetching
-credentials (e.g., for RPCs) from a subprocess.
+The Credential Helper standard defines an extensible protocol for tools like
+build systems to fetch credentials (e.g., for RPCs) from a subprocess.
 
 
 ## Authors
@@ -107,8 +107,8 @@ specifying outputs **MUST** specify a JSON schema for the output.
 
 This section specifies the list of commands a Credential Helper **MUST** and
 **SHOULD** implement. All commands **MUST** conform to the following grammar in
-EBNF. A Credential Helper **MAY** extend the list of *standard-command* specified
-below with *user-defined* *extension-command*s.
+EBNF. A Credential Helper **MAY** extend the list of *standard-command*
+specified below with *user-defined* *extension-command*s.
 
 
 ```
@@ -131,8 +131,6 @@ Examples:
 
   - *standard-command*:
     - `get`
-    - `store`
-    - `login`
 
   - *extension-command*:
     - `get-credentials`
@@ -164,12 +162,13 @@ additional parameters when invoking a Credential Helper's `get` command.
 A Tool invoking a Credential Helper **MUST** provide an input conforming to the
 schema defined in
 [GetCredentialsRequest](schemas/get-credentials-request.schema.json) which
-**SHOULD NOT** contain addtional properties. A Tool **MUST** ignore failures
-providing the input to the Credential Helpers.
+**SHOULD NOT** contain addtional properties. A Tool **SHOULD NOT** consider
+failures from providing the *input* to the Credential Helper as failure of the
+command.
 
-A Credential Helper **MAY** read the input provided by the tool to decide which,
-if any, credentials to return as output. Credential Helpers **SHOULD** not fail
-if the input contains additional properties.
+A Credential Helper **SHOULD** read the input provided by the tool to decide
+which, if any, credentials to return as output. Credential Helpers **SHOULD
+NOT** fail if the input contains additional properties.
 
 <details>
   <summary>
