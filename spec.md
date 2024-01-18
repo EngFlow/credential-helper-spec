@@ -146,9 +146,6 @@ Examples:
 The `get` command is used by tools to retrieve credentials from a Credential
 Helper. A Credential Helper **MUST** implement this command.
 
-A Tool **SHOULD** cache credentials to avoid invoking Credential Helpers
-unneccessarily often.
-
 #### Parameters
 
 `get` does not require any *command-specific* parameters. A credential Helper
